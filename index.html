@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SyndicateGateway | Global Payment Solution</title>
+    <title>Syndicate Gateway | Next-Gen Web3 Payment Infrastructure</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0a0b10;
             color: #ffffff;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         .gradient-text {
@@ -26,12 +27,13 @@
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
             border: 1px solid rgba(79, 172, 254, 0.5);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .hero-bg {
@@ -47,227 +49,233 @@
 
         .btn-primary {
             background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            transition: opacity 0.3s;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             opacity: 0.9;
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
         }
 
-        .nav-link {
-            transition: color 0.3s;
+        @keyframes pulse-custom {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.5; }
         }
 
-        .nav-link:hover {
-            color: #4facfe;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .float-anim {
-            animation: float 6s ease-in-out infinite;
+        .live-pulse {
+            animation: pulse-custom 2s infinite;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header / Navbar -->
     <header class="fixed w-full z-50 bg-black/50 backdrop-blur-md border-b border-white/10">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center shadow-lg">
                     <i class="fas fa-shield-alt text-white text-xl"></i>
                 </div>
                 <span class="text-2xl font-bold tracking-tight">Syndicate<span class="text-blue-400">Gateway</span></span>
             </div>
-            
-            <nav class="hidden md:flex gap-8 items-center font-medium">
-                <a href="#" class="nav-link">Personal</a>
-                <a href="#" class="nav-link">Business</a>
-                <a href="#" class="nav-link">API Docs</a>
-                <a href="#" class="nav-link">Fees</a>
+
+            <nav class="hidden md:flex gap-8 items-center font-medium text-gray-400">
+                <a href="#features" class="hover:text-blue-400 transition">Features</a>
+                <a href="#api" class="hover:text-blue-400 transition">API Docs</a>
+                <a href="#fees" class="hover:text-blue-400 transition">Fees</a>
+                <a href="#status" id="system-status-nav" class="text-xs border border-white/10 px-3 py-1 rounded-full flex items-center gap-2">
+                    <span class="w-2 h-2 bg-yellow-500 rounded-full"></span> Checking Status
+                </a>
             </nav>
 
             <div class="flex gap-4">
-                <button class="px-5 py-2 rounded-full border border-white/20 hover:bg-white/10 transition">Login</button>
-                <button class="px-5 py-2 rounded-full btn-primary text-black font-semibold">Sign Up</button>
+                <button onclick="redirectToApp('login')" class="px-5 py-2 rounded-full border border-white/20 hover:bg-white/10 transition text-sm font-semibold">Login</button>
+                <button onclick="redirectToApp('signup')" class="px-5 py-2 rounded-full btn-primary text-black font-bold text-sm">Sign Up</button>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative pt-40 pb-20 px-6 overflow-hidden">
+    <section class="relative pt-40 pb-20 px-6">
         <div class="hero-bg"></div>
         <div class="container mx-auto text-center max-w-4xl">
-            <span class="inline-block py-1 px-3 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold mb-6">
-                Next-Gen Payment Infrastructure
+            <span class="inline-block py-1 px-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold mb-6 tracking-widest uppercase">
+                Built on Base Mainnet
             </span>
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">
-                Secure & Instant <br><span class="gradient-text">Global Payments</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight tracking-tighter">
+                Global Payments, <br><span class="gradient-text">Instant Settlements</span>
             </h1>
-            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-                SyndicateGateway empowers businesses to accept local and international payments seamlessly. Automated, reliable, and developer-friendly.
+            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+                Accept crypto and fiat payments globally. Settle directly to your local accounts via the Base Network. Secure, compliant, and lightning fast.
             </p>
             <div class="flex flex-wrap justify-center gap-6">
-                <button class="px-8 py-4 rounded-xl btn-primary text-black font-bold text-lg shadow-lg shadow-blue-500/25">Get Started Now</button>
-                <button class="px-8 py-4 rounded-xl glass-card font-bold text-lg flex items-center gap-2">
-                    <i class="fas fa-play text-sm"></i> Watch Demo
+                <button onclick="redirectToApp('login')" class="px-10 py-4 rounded-2xl btn-primary text-black font-bold text-lg shadow-xl shadow-blue-500/20">Get Started Now</button>
+                <button class="px-8 py-4 rounded-2xl glass-card font-bold text-lg flex items-center gap-3">
+                    <i class="fas fa-play text-xs text-blue-400"></i> Watch Demo
                 </button>
             </div>
 
-            <!-- Dashboard Preview -->
-            <div class="mt-20 relative">
-                <div class="absolute inset-0 bg-blue-500/20 blur-[120px] rounded-full"></div>
-                <div class="glass-card rounded-2xl p-4 md:p-8 relative overflow-hidden">
-                    <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
-                        <div class="flex gap-2">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <!-- Interactive Dashboard Preview -->
+            <div class="mt-20 relative group">
+                <div class="absolute inset-0 bg-blue-500/10 blur-[100px] rounded-full group-hover:bg-blue-500/20 transition"></div>
+                <div class="glass-card rounded-[2rem] p-4 md:p-8 relative overflow-hidden shadow-2xl">
+                    <div class="flex items-center justify-between mb-8 border-b border-white/5 pb-6">
+                        <div class="flex items-center gap-6">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                            </div>
+                            <div class="bg-white/5 px-4 py-1.5 rounded-full text-[10px] text-gray-500 font-mono tracking-wider">
+                                api.syndicategateway.com/v1/dashboard
+                            </div>
                         </div>
-                        <div class="bg-white/5 px-4 py-1 rounded text-xs text-gray-500">syndicategateway.com/dashboard</div>
+                        <div class="flex items-center gap-2">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest">Live Engine</span>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white/5 p-6 rounded-xl text-left border border-white/5">
-                            <p class="text-gray-500 text-sm mb-2">Total Balance</p>
-                            <h3 class="text-3xl font-bold">$12,450.00</h3>
-                            <p class="text-green-400 text-xs mt-2">+12% from last week</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-black/40 p-6 rounded-2xl text-left border border-white/5">
+                            <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Portfolio Value</p>
+                            <h3 class="text-3xl font-bold tracking-tight" id="live-balance">$14,250.00</h3>
+                            <p class="text-blue-400 text-[10px] mt-2 font-bold">+15.4% Last 24h</p>
                         </div>
-                        <div class="bg-white/5 p-6 rounded-xl text-left border border-white/5">
-                            <p class="text-gray-500 text-sm mb-2">Success Rate</p>
-                            <h3 class="text-3xl font-bold text-blue-400">99.8%</h3>
-                            <p class="text-gray-400 text-xs mt-2">Active processing</p>
+                        <div class="bg-black/40 p-6 rounded-2xl text-left border border-white/5">
+                            <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Uptime Score</p>
+                            <h3 class="text-3xl font-bold text-blue-400 tracking-tight">99.98%</h3>
+                            <p class="text-gray-400 text-[10px] mt-2 italic tracking-wide">Syncing with Base Mainnet</p>
                         </div>
-                        <div class="bg-white/5 p-6 rounded-xl text-left border border-white/5">
-                            <p class="text-gray-500 text-sm mb-2">Active Projects</p>
-                            <h3 class="text-3xl font-bold">14</h3>
-                            <p class="text-blue-400 text-xs mt-2">All systems normal</p>
+                        <div class="bg-black/40 p-6 rounded-2xl text-left border border-white/5">
+                            <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Connected Nodes</p>
+                            <h3 class="text-3xl font-bold tracking-tight">24</h3>
+                            <div class="flex gap-1 mt-3 h-1 bg-white/5 rounded-full overflow-hidden">
+                                <div class="w-2/3 bg-blue-500"></div>
+                            </div>
                         </div>
+                    </div>
+
+                    <!-- Mini Live Graph -->
+                    <div class="h-24 flex items-end gap-1.5 px-2" id="live-graph">
+                        <!-- Bars generated by script -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="py-20 bg-black/40">
+    <!-- Services / Features Section -->
+    <section id="features" class="py-24 bg-black/20">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">Why Choose SyndicateGateway?</h2>
-                <p class="text-gray-500">Built for merchants who demand speed and security.</p>
+            <div class="max-w-xl mb-16">
+                <h2 class="text-4xl font-bold mb-4">Engineered for <br><span class="text-blue-400">Speed & Reliability</span></h2>
+                <p class="text-gray-500 leading-relaxed">Everything you need to scale your business internationally without the banking hurdles.</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card p-10 rounded-3xl text-center">
-                    <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-bolt text-blue-400 text-3xl"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold mb-4">Instant Payouts</h4>
-                    <p class="text-gray-400">Withdraw your earnings instantly to your local bank or crypto wallet without delays.</p>
-                </div>
-                <div class="glass-card p-10 rounded-3xl text-center">
-                    <div class="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-code text-purple-400 text-3xl"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold mb-4">Easy Integration</h4>
-                    <p class="text-gray-400">Integration takes minutes with our robust SDKs for PHP, Node.js, and Python.</p>
-                </div>
-                <div class="glass-card p-10 rounded-3xl text-center">
-                    <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-globe text-green-400 text-3xl"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold mb-4">Multi-Currency</h4>
-                    <p class="text-gray-400">Accept 50+ fiat currencies and all major cryptocurrencies in one place.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Payment Methods -->
-    <section class="py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h3 class="text-2xl font-bold mb-12 text-gray-400 uppercase tracking-widest">Supported Payment Methods</h3>
-            <div class="flex flex-wrap justify-center gap-10 opacity-60">
-                <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition cursor-pointer">
-                    <i class="fab fa-bitcoin text-4xl text-orange-500"></i>
-                    <span class="text-xl font-bold">Bitcoin</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-10 rounded-3xl">
+                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-8">
+                        <i class="fas fa-bolt text-blue-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Web3 Settlements</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Instant BDT settlements via local rails using stablecoins on Base Layer 2.</p>
                 </div>
-                <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition cursor-pointer">
-                    <i class="fab fa-ethereum text-4xl text-blue-300"></i>
-                    <span class="text-xl font-bold">Ethereum</span>
+                <div class="glass-card p-10 rounded-3xl">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-8">
+                        <i class="fas fa-shield-halved text-purple-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Advanced AML/KYC</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Automated compliance engine ensures every transaction meets global standards.</p>
                 </div>
-                <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition cursor-pointer">
-                    <i class="fas fa-credit-card text-4xl text-red-500"></i>
-                    <span class="text-xl font-bold">MasterCard</span>
-                </div>
-                <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition cursor-pointer">
-                    <i class="fab fa-cc-visa text-4xl text-blue-600"></i>
-                    <span class="text-xl font-bold">VISA</span>
-                </div>
-                <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition cursor-pointer">
-                    <div class="w-10 h-10 bg-pink-500 rounded-lg flex items-center justify-center text-white font-bold italic">b</div>
-                    <span class="text-xl font-bold">bKash</span>
+                <div class="glass-card p-10 rounded-3xl">
+                    <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-8">
+                        <i class="fas fa-terminal text-green-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Dev-First APIs</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Detailed docs and SDKs for PHP, Node, and Python. Integration in minutes.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-white/10 py-16">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-6">
-                        <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">
-                            <i class="fas fa-shield-alt text-white text-sm"></i>
-                        </div>
-                        <span class="text-xl font-bold">Syndicate<span class="text-blue-400">Gateway</span></span>
-                    </div>
-                    <p class="text-gray-500 text-sm">
-                        Global payment gateway providing innovative solutions for businesses of all sizes.
-                    </p>
-                </div>
-                <div>
-                    <h5 class="font-bold mb-6">Product</h5>
-                    <ul class="text-gray-500 space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-blue-400">Personal Account</a></li>
-                        <li><a href="#" class="hover:text-blue-400">Business Solutions</a></li>
-                        <li><a href="#" class="hover:text-blue-400">Mobile App</a></li>
-                        <li><a href="#" class="hover:text-blue-400">Pricing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-bold mb-6">Support</h5>
-                    <ul class="text-gray-500 space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-blue-400">Help Center</a></li>
-                        <li><a href="#" class="hover:text-blue-400">API Documentation</a></li>
-                        <li><a href="#" class="hover:text-blue-400">System Status</a></li>
-                        <li><a href="#" class="hover:text-blue-400">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-bold mb-6">Legal</h5>
-                    <ul class="text-gray-500 space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-blue-400">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-blue-400">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-blue-400">AML/KYC Policy</a></li>
-                    </ul>
-                </div>
+    <footer class="bg-black border-t border-white/5 py-12">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <span class="font-bold opacity-80">© 2024 Syndicate Gateway.</span>
+                <span class="text-xs text-gray-600">Infrastructure by KHC</span>
             </div>
-            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-gray-600 text-sm">© 2024 Syndicate Gateway. All rights reserved by KHC.</p>
-                <div class="flex gap-6">
-                    <a href="#" class="text-gray-500 hover:text-white"><i class="fab fa-telegram"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-white"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-white"><i class="fab fa-github"></i></a>
-                </div>
+            <div class="flex gap-8 text-sm text-gray-500">
+                <a href="#" class="hover:text-blue-400">Terms</a>
+                <a href="#" class="hover:text-blue-400">Privacy</a>
+                <a href="#" class="hover:text-blue-400">Twitter</a>
+                <a href="https://github.com/syndicategateway" class="hover:text-white"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </footer>
 
+    <script>
+        // --- CONFIGURATION ---
+        const REPLIT_APP_URL = "https://payment-m-v-p--syndicategateway.replit.app";
+
+        // 1. Unified Redirect Function
+        function redirectToApp(path) {
+            window.location.href = `${REPLIT_APP_URL}/${path}`;
+        }
+
+        // 2. Health Check Connection (GitHub to Replit Bridge)
+        async function checkEngineStatus() {
+            const statusNav = document.getElementById('system-status-nav');
+            try {
+                const start = Date.now();
+                const res = await fetch(`${REPLIT_APP_URL}/api/health`);
+                const end = Date.now() - start;
+                
+                if(res.ok) {
+                    statusNav.innerHTML = `<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Systems Live (${end}ms)`;
+                    statusNav.classList.add('text-green-500');
+                    statusNav.classList.remove('text-gray-400');
+                }
+            } catch (e) {
+                statusNav.innerHTML = `<span class="w-2 h-2 bg-red-500 rounded-full"></span> Connection Timeout`;
+                statusNav.classList.add('text-red-400');
+            }
+        }
+
+        // 3. Dynamic Live Graph Logic
+        function generateLiveGraph() {
+            const container = document.getElementById('live-graph');
+            const bars = 35;
+            container.innerHTML = Array.from({length: bars}).map(() => `
+                <div class="graph-bar bg-blue-500/20 w-full rounded-t-sm transition-all duration-700" style="height: ${Math.random() * 80 + 20}%"></div>
+            `).join('');
+
+            setInterval(() => {
+                document.querySelectorAll('.graph-bar').forEach(bar => {
+                    bar.style.height = `${Math.random() * 80 + 20}%`;
+                });
+            }, 1500);
+        }
+
+        // 4. Live Balance Simulation
+        let currentBalance = 14250.00;
+        function updateBalance() {
+            currentBalance += (Math.random() * 10) - 4; // Simulated live fluctuations
+            document.getElementById('live-balance').innerText = `$${currentBalance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+
+        // Initialize Everything
+        window.onload = () => {
+            checkEngineStatus();
+            generateLiveGraph();
+            setInterval(updateBalance, 3000);
+        };
+    </script>
 </body>
 </html>
